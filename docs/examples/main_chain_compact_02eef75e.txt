@@ -1,0 +1,99 @@
+================================================================================
+UPR 主链路 (Main Chain) - 紧凑格式
+================================================================================
+
+生成时间: 2025-12-25 10:21:18
+版本: 1.4.0
+根节点 Flow ID: 02eef75e-bb2f-4283-95b4-249521aa2c12
+根节点 Process ID: 251da196-55f8-4c57-a783-9888cf33c626
+规则: 每个层级选择 exchange value 最大的边
+
+格式说明:
+  L<层级>: <Process名称> | <Process完整UUID>
+    << <Flow名称> | <Flow完整UUID> | value=<数值>
+    ↓
+
+================================================================================
+
+[根节点详细信息]
+Process: 线材,不锈钢, 转炉钢
+
+输入 (11项):
+  ← 钢坯, 不锈钢 | debd442b-9a58-3002-a734-6efa8780b95e | provider=1324fcd4... | value=1.015269
+  ← 电力，中压 | 3fca3a42-df18-4d82-bd05-4ef9a2563fb3 | provider=9cdeaade... | value=0.420159
+  ← 中水 | 7eb14ae3-eaef-33a9-8819-397b9b33c379 | provider=e35a53cb... | value=0.068001
+  ← 除盐水 | d39a8c04-fbcd-4463-884a-1ffd3adc85c9 | provider=6904a792... | value=0.032215
+  ← hard coal | 0d3eda5a-4601-4573-9549-0701c459ab88 | provider=37a65d8c... | value=0.027391
+  ← 压缩空气 | 2a4bb4b8-7397-3acc-819e-c926b614fce0 | provider=e3bcd57a... | value=0.022580
+  ← hard coal | 0d3eda5a-4601-4573-9549-0701c459ab88 | provider=37a65d8c... | value=0.021074
+  ← 蒸汽 | eda295c6-48c8-39d4-a27c-9c4a7b8f92a6 | provider=fa72a322... | value=0.011329
+  ← 氮气，钢厂 | 5ff3189c-4994-309c-93ac-6a229133eebb | provider=7e018b31... | value=0.003473
+  ← Water, unspecified natural origin | 831f249e-53f2-49cf-a93c-7cee105f048e | provider=N/A... | value=0.000137
+  ← 氧气，钢厂 | da03f6e9-e54a-34af-b1ec-21a967e4715a | provider=482d26ed... | value=0.000028
+
+输出 (11项):
+  → 线材, 不锈钢 | 02eef75e-bb2f-4283-95b4-249521aa2c12 | value=1.000000
+  → Carbon dioxide, fossil | 349b29d1-3e58-4c66-98b9-9d1a076efd2e | value=0.151112
+  → Carbon dioxide, fossil | 349b29d1-3e58-4c66-98b9-9d1a076efd2e | value=0.137596
+  → Nitrogen oxides | c1b91234-6f24-417b-8309-46111d09c457 | value=0.000036
+  → Sulfur oxides | ba5fc0b6-770b-4da1-9b3f-e3b5087f07cd | value=0.000010
+  → Particulate Matter, > 2.5 um and < 10um | b967e1bf-f09b-4c89-8740-ace21db47bba | value=0.000003
+  → 生活污水，平均 | fc2bb0dc-b80c-4eae-b0a1-a9c162d5d03c | value=-0.000003
+  → waste mineral oil | 1b30b018-ac39-41f4-a9e0-92057eef8bb8 | value=-0.000004
+  → inert waste, for final disposal | 240c1a3c-1aba-4528-afc3-3f27f56583be | value=-0.000652
+  → iron scrap, unsorted | d7432632-40dc-4af8-8125-cb70dd9742c5 | value=-0.017617
+  → 废钢，未分拣 | 9c471daa-2344-415e-8088-601abd51be82 | value=-0.019412
+
+================================================================================
+
+[主链路路径]
+
+L0: 线材,不锈钢, 转炉钢 | 251da196-55f8-4c57-a783-9888cf33c626
+  << 线材, 不锈钢 | 02eef75e-bb2f-4283-95b4-249521aa2c12 | value=0.000000
+  ↓
+L1: 钢坯,转炉,不锈钢 | 1324fcd4-719b-431f-a336-e7f9523f3f89
+  << 钢坯, 不锈钢 | debd442b-9a58-3002-a734-6efa8780b95e | value=1.015269
+  ↓
+L2: 循环水,钢厂 | 09f480b3-0d5d-4005-9b55-d727f3fce2a4
+  << 循环水，钢厂 | 2b6741aa-60f5-34b6-8611-92a8dacde283 | value=45.752535
+  ↓
+L3: 电力,中压 | 9cdeaade-e4eb-406c-b64a-5d38fb34854f
+  << 电力，中压 | 3fca3a42-df18-4d82-bd05-4ef9a2563fb3 | value=0.001029
+  ↓
+L4: 电力,中压 | 0e06d234-3565-4711-b048-41808564abc8
+  << 电力，中压 | 3fca3a42-df18-4d82-bd05-4ef9a2563fb3 | value=0.911801
+  ↓
+L5: 电力,中压 | b5621276-ef0a-45e4-9c69-71c5e681b734
+  << 电力，中压 | 3fca3a42-df18-4d82-bd05-4ef9a2563fb3 | value=1.292056
+  ↓
+L6: 电力,35 kV | 544cd38c-d1ee-4837-9f1b-96b09ee9bc1b
+  << 电力，35 kV | a9e39537-9b60-48de-a1e3-71af56075572 | value=2.652318
+  ↓
+L7: 电力,可供混合,35 kV | 9c64dfdc-d98a-4462-be34-407719cfaa1d
+  << 电力，35 kV | a9e39537-9b60-48de-a1e3-71af56075572 | value=3.600000
+  ↓
+L8: 电力,110 kV | 78b1bb39-b04e-42b6-a6ff-ec5ce48f3610
+  << 电力，110 kV | 671532b2-7cf5-4432-9287-16890e7c0f63 | value=3.536108
+  ↓
+L9: 电力,可供混合,110 kV | 3aea5133-bca0-4192-a5d3-1b2f6f89f31f
+  << 电力，110 kV | 671532b2-7cf5-4432-9287-16890e7c0f63 | value=3.600000
+  ↓
+L10: 电力,≥220 kV | c68a6bf9-e239-4418-af19-7df02c4d6026
+  << 电力，≥220 kV | 33a486bf-f129-47a9-8958-4f635372a051 | value=3.323046
+  ↓
+L11: 电力,可供混合,≥220 kV | 2952b2c9-9bfa-4e6c-9edf-da6bd01c50ac
+  << 电力，≥220 kV | 33a486bf-f129-47a9-8958-4f635372a051 | value=3.600000
+  ↓
+L12: 电力,自产混合,中高压 | 265fe465-4296-4320-bd00-719a5aba7b51
+  << 电力，中高压 | 848df11e-a17e-4c09-ad2d-ffce9dd12b8b | value=2.622856
+  ↓
+L13: 电力,燃煤发电 | 17f170cd-f8f1-4f27-af8c-eb3dca8c433a
+  << 电力，中高压 | 848df11e-a17e-4c09-ad2d-ffce9dd12b8b | value=2.401751
+  ↓
+L14: market for water, completely softened [v3.10.0] | 01065eec-78f7-3d4b-a663-c271c7aaf5e1
+  << water, completely softened | cfc90fee-20f0-451a-8e50-a5bd859d3feb | value=1.232212
+
+================================================================================
+链路长度: 15 个节点
+最大深度: 14 层
+================================================================================
