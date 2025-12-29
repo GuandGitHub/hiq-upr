@@ -64,8 +64,8 @@ pip install -r requirements.txt
 # PostgreSQL Connection
 PG_HOST = "101.227.234.12"
 PG_PORT = 5432
-PG_USER = "root"
-PG_PASSWORD = "HiqProdDB@2024"
+PG_USER = "pg"
+PG_PASSWORD = "password"
 PG_DATABASE = "hiq_background_db"
 
 # Root node information
