@@ -150,6 +150,7 @@ class MainChainBuilder:
                 WHERE e.process_id = %s
                   AND e.is_input = true
                   AND e.provider_id IS NOT NULL
+                  AND e.provider_id != ''
                   AND e.is_deleted = false
                   AND pd.category_id = %s
             """
@@ -178,6 +179,7 @@ class MainChainBuilder:
                 WHERE process_id = %s
                   AND is_input = true
                   AND provider_id IS NOT NULL
+                  AND provider_id != ''
                   AND is_deleted = false
                   AND version = %s
                   AND id = ANY(%s)
@@ -204,6 +206,7 @@ class MainChainBuilder:
                 WHERE process_id = %s
                   AND is_input = true
                   AND provider_id IS NOT NULL
+                  AND provider_id != ''
                   AND is_deleted = false
                   AND version = %s
                 ORDER BY value DESC NULLS LAST
@@ -348,22 +351,36 @@ class MainChainBuilder:
         return name
     
     def get_flow_name(self, flow_id: str) -> str:
-        """获取 flow 的名称"""
+        """获取 flow 的名称（优先查询指定版本，如果没有则查询任意版本）"""
         if flow_id in self.flow_names:
             return self.flow_names[flow_id]
         
+        name = None
         try:
+            # 先尝试查询指定版本
             query = f"""
-                SELECT name FROM {self.schema}.{self.flows_table}
+                SELECT name, version FROM {self.schema}.{self.flows_table}
                 WHERE id = %s AND version = %s
-                LIMIT 1
             """
             self.cursor.execute(query, (flow_id, config.VERSION))
-            
             result = self.cursor.fetchone()
-            name = result['name'] if result else None
-        except:
-            name = None
+            
+            if result:
+                name = result['name']
+            else:
+                # 如果指定版本没有，尝试查询任意版本（优先较新版本）
+                query = f"""
+                    SELECT name, version FROM {self.schema}.{self.flows_table}
+                    WHERE id = %s
+                    ORDER BY version DESC
+                    LIMIT 1
+                """
+                self.cursor.execute(query, (flow_id,))
+                result = self.cursor.fetchone()
+                if result:
+                    name = f"{result['name']} [v{result['version']}]"
+        except Exception as e:
+            print(f"⚠️  获取 flow 名称失败: {e}")
         
         if not name:
             name = f"Flow-{flow_id[:8]}..."

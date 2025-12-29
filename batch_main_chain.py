@@ -74,7 +74,7 @@ def analyze_main_chains(process_ids: list, mode: str = "production", output_dir:
     # 根据模式设置输出目录
     if output_dir is None:
         if mode == "editor":
-            output_dir = os.path.join("output", "coal")
+            output_dir = os.path.join("output", "steel")
         else:
             output_dir = "output"
     
